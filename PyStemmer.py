@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
-
+from joblib import dump
 
 # очистка текста с помощью regexp приведение слов в инфинитив и нижний регистр, замена цифр
 
@@ -56,7 +56,7 @@ def train_test_split(data, validation_split=0.1):
 
 # - - - -
 
-def openai(xd):
+def openai():
     data = load_data()
     D = train_test_split(data)
     text_clf = Pipeline([
@@ -65,14 +65,13 @@ def openai(xd):
     ])
     text_clf.fit(D['train']['x'], D['train']['y'])
     predicted = text_clf.predict(D['train']['x'])
-
+    dump(text_clf, 'toxic.joblib')
     # Начало тестирования программы
+    # z = xd
+    # zz = []
+    # zz.append(z)
+    # predicted = text_clf.predict(zz)
+    # res = predicted[0]
+    # return res
 
-
-    z = xd
-    zz = []
-    zz.append(z)
-    predicted = text_clf.predict(zz)
-    res = predicted[0]
-    return res
-
+openai()

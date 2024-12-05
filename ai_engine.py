@@ -1,4 +1,5 @@
-# Use a pipeline as a high-level helper
-from transformers import pipeline
-
-pipe = pipeline("question-answering", model="google/bigbird-base-trivia-itc")
+from joblib import load
+toxic = load('toxic.joblib')
+emotion = load('emotions_AI.joblib')
+message = ["Ты молодец"]
+print(toxic.predict(message))

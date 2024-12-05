@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
-
+from joblib import dump
 
 # очистка текста с помощью regexp приведение слов в инфинитив и нижний регистр, замена цифр
 
@@ -57,16 +57,9 @@ def openai():
                     ('clf', SGDClassifier(loss='hinge')),
                     ])
     text_clf.fit(D['train']['x'], D['train']['y'])
-    predicted = text_clf.predict( D['train']['x'] )
-    
-# Начало тестирования программы
-    
-    z = input("Введите предложение, без знака препинания в конце: ")
-    zz = []
-    zz.append(z)
-    predicted = text_clf.predict(zz) 
-    print(predicted[0])
-    
-# - - - -
-if __name__ == '__main__':
-    sys.exit(openai())
+    dump(text_clf, 'sgd_model.joblib')
+
+
+
+
+openai()
