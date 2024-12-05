@@ -7,5 +7,4 @@ def main(message):
     bot.send_message(message.chat.id, 'Привет, это телеграмм бот AI_Bezna.')
 
 
-
 bot.polling(none_stop=True)
