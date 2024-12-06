@@ -1,7 +1,6 @@
 from joblib import load
 toxic = load('toxic.joblib')
 emotion = load('emotions_AI.joblib')
-k = "ура"
 def toxic_pred(msg):
     z = msg
     zz = []
@@ -17,5 +16,3 @@ def emotion_pred(msg):
     predicted = emotion.predict(zz)
     res = predicted[0]
     return res
-
-print(emotion_pred(k))
