@@ -66,8 +66,8 @@ def openai():
     text_clf.fit(D['train']['x'], D['train']['y'])
     predicted = text_clf.predict(D['train']['x'])
     dump(text_clf, 'toxic.joblib')
-    # Начало тестирования программы
-    # z = xd
+    # # Начало тестирования программы
+    # z = "ты дурак"
     # zz = []
     # zz.append(z)
     # predicted = text_clf.predict(zz)

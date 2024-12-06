@@ -8,8 +8,8 @@ def main(message):
 
 @bot.message_handler()
 def main(message):
-    bot.send_message(message.chat.id, toxic_pred(message))
-    bot.send_message(message.chat.id, emotion_pred(message))
+    bot.send_message(message.chat.id, toxic_pred(str(message.text)))
+    bot.send_message(message.chat.id, emotion_pred(str(message.text)))
 
 # @bot.message_handler()
 # def main(message):

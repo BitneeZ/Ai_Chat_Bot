@@ -57,7 +57,7 @@ def openai():
                     ('clf', SGDClassifier(loss='hinge')),
                     ])
     text_clf.fit(D['train']['x'], D['train']['y'])
-    dump(text_clf, 'sgd_model.joblib')
+    dump(text_clf, 'emotions.joblib')
 
 
 
