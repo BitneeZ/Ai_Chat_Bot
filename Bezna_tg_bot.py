@@ -6,6 +6,8 @@ bot = telebot.TeleBot('7467372440:AAH_4eA_UdxhHcQrkPdgJf1cGIEE1bBuoMI')
 def main(message):
     bot.send_message(message.chat.id, 'Привет, это телеграмм бот AI_Bezna.')
 
+
+
 @bot.message_handler()
 def main(message):
     bot.send_message(message.chat.id, toxic_pred(str(message.text)))
