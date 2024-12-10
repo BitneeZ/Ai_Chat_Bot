@@ -1,13 +1,13 @@
-import sys
 import numpy as np
-import pickle
 import re
+
+import numpy as np
 from Stemmer import Stemmer
+from joblib import dump
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
-from joblib import dump
+
 
 # очистка текста с помощью regexp приведение слов в инфинитив и нижний регистр, замена цифр
 

@@ -1,8 +1,3 @@
-import pandas as pd
-import sys
-import numpy as np
-import pickle
-import re
 # df = pd.read_csv('labeled.csv')
 # print(df)
 # file = open('Panama.txt', 'w')
