@@ -1,5 +1,5 @@
 from joblib import load
-toxic = load('toxic_v3.joblib')
+toxic = load('toxic_v4.joblib')
 emotion = load('emotions_AI.joblib')
 def toxic_pred(msg):
     z = msg

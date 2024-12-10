@@ -28,7 +28,7 @@ def load_data():
         if not ('#' in line):
             row = line.split("@")
             data['text'] += [row[0]]
-            #print([row[1]])
+            print([row[1]])
             data['tag'] += [row[1]]
             #print(len(data['tag']))
 
@@ -65,7 +65,7 @@ def openai():
     ])
     text_clf.fit(D['train']['x'], D['train']['y'])
     predicted = text_clf.predict(D['train']['x'])
-    dump(text_clf, 'toxic_v3.joblib')
+    dump(text_clf, 'toxic_v4.joblib')
     # # Начало тестирования программы
     # z = "ты дурак"
     # zz = []
