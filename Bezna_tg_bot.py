@@ -12,6 +12,8 @@ def main(message):
 def main(message):
     bot.send_message(message.chat.id, toxic_pred(str(message.text)))
     #bot.send_message(message.chat.id, emotion_pred(str(message.text)))
+    with open('Dorabotka.txt', 'a') as file:
+        file.write(str(message.text) + '\n')
 
 # @bot.message_handler()
 # def main(message):
