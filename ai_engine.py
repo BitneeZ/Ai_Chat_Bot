@@ -1,6 +1,6 @@
 from joblib import load
 
-toxic = load('toxic_v10.joblib')
+toxic = load('AI/toxic_v10.joblib')
 emotion = load('emotions_AI.joblib')
 
 
