@@ -1,7 +1,7 @@
 from joblib import load
 
 toxic = load('AI/toxic_v10.joblib')
-emotion = load('emotions_AI.joblib')
+emotion = load('AI/emotions_AI.joblib')
 
 
 def toxic_pred(msg):
