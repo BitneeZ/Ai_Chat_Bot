@@ -45,7 +45,7 @@ def analyze_emotion(sentence):
 
     # Если эмоции не найдены, оставляем нейтральное значение
     if not detected_emotions:
-        detected_emotions = ["Не удалось определить"]
+        detected_emotions = ["Нейтрально"]
 
     return {
         'sentence': sentence,
@@ -55,7 +55,7 @@ def analyze_emotion(sentence):
 
 # запуск
 if __name__ == "__main__":
-    example_sentence = "I am happy!" #тут меняй переменную как хочешь, чтобы она могла быть встроеннна в бота
+    example_sentence = "I feel so proud and accomplished today!" #тут меняй переменную как хочешь, чтобы она могла быть встроеннна в бота
     result = analyze_emotion(example_sentence) # это лучше не менять, есть шанс что всё сломаеться :)
     # вывод результата
     print("\n--- Анализ эмоции ---")
