@@ -6,3 +6,109 @@
 
 Как твои дела?Neutral
 
+ПриетNeutral
+
+Как у тебя дела ?Toxic
+
+!Neutral
+
+?Neutral
+
+)Neutral
+
++Neutral
+
+"Neutral
+
+*Neutral
+
+Как твои дела?@Neutral
+
+С кайфом@Neutral
+
+Чушка@Neutral
+
+Урааа@Neutral
+
+Как тебе погода?@Neutral
+
+Чушка@Neutral
+
+Сука@Toxic
+
+Сабака@Neutral
+
+Сабака писала, сабака какала@Neutral
+
+Ущерб@Neutral
+
+Тупой@Toxic
+
+Пидарас@Toxic
+
+Пизда@Toxic
+
+Хуц@Neutral
+
+Хуй@Toxic
+
+Скибиди туалет@Neutral
+
+Чмошник@Toxic
+
+Падла писюкастая@Toxic
+
+Я ебал семью твоего разраба@Neutral
+
+Ебал@Neutral
+
+Секс@Neutral
+
+Го вирт?@Neutral
+
+Чушпан@Neutral
+
+Бос кфс@Neutral
+
+Пикми@Neutral
+
+Я люблю летот@Neutral
+
+У меня есть машина девятка@Neutral
+
+Я нивовод@Neutral
+
+Хочу пиццы@Neutral
+
+Ты клёвый@Neutral
+
+хуесос@Toxic
+
+Пошел нахуй@Toxic
+
+Пошёл нахуй@Toxic
+
+Пизда@Toxic
+
+токсик@Neutral
+
+Чмо@Toxic
+
+Хуй@Toxic
+
+Залупа@Toxic
+
+Гуд@Neutral
+
+Лутший@Neutral
+
+Мать ебал@Toxic
+
+Матье бал@Neutral
+
+Пида...@Neutral
+
+шо ты, голова@Neutral
+
+не подсматривай, гадость@Neutral
+
