@@ -1,4 +1,5 @@
 import json
+from random import randint as rn
 
 import telebot
 
@@ -8,10 +9,15 @@ bot = telebot.TeleBot('7467372440:AAH_4eA_UdxhHcQrkPdgJf1cGIEE1bBuoMI')
 #@AI_Chat_Bezna_bot
 user_datas = {}
 user_data = {}
-WARNING_THRESHOLD = 5  # Точка, после которой выдается предупреждение
+WARNING_THRESHOLD_0 = rn(7, 15)  # Точка, после которой выдается предупреждение
+WARNING_THRESHOLD_1 = rn(3, 7)
+WARNING_THRESHOLD_2 = rn(1, 3)
+print(WARNING_THRESHOLD_0, WARNING_THRESHOLD_1, WARNING_THRESHOLD_2)
 MAX_WARNINGS = 3
-NEUTRAL_THRESHOLD = 5
-
+NEUTRAL_THRESHOLD_0 = rn(45, 130)
+NEUTRAL_THRESHOLD_1 = rn(100, 245)
+NEUTRAL_THRESHOLD_2 = rn(175, 300)
+print(NEUTRAL_THRESHOLD_0, NEUTRAL_THRESHOLD_1, NEUTRAL_THRESHOLD_2)
 
 # print(NEUTRAL_THRESHOLD)
 @bot.message_handler(commands=['start'])
@@ -68,18 +74,52 @@ def main(message):
         # Выдача предупреждений
         with open(f'Chat_{message.chat.id}_members.json', "r", encoding="utf-8") as file:
             user_datas = json.load(file)
-        if user_datas[str(user_id)]["toxic_count"] >= WARNING_THRESHOLD:
-            if user_datas[str(user_id)]["warnings"] < MAX_WARNINGS:
-                user_datas[str(user_id)]["warnings"] += 1
-                user_datas[str(user_id)]["toxic_count"] = 0
-                user_datas.update(user_datas)
-                with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
-                    json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
+        if user_datas[str(user_id)]["warnings"] == 0:
+            if user_datas[str(user_id)]["toxic_count"] >= WARNING_THRESHOLD_0:
+                if user_datas[str(user_id)]["warnings"] < MAX_WARNINGS:
+                    user_datas[str(user_id)]["warnings"] += 1
+                    user_datas[str(user_id)]["toxic_count"] = 0
+                    user_datas.update(user_datas)
+                    with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
+                        json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
 
-                bot.send_message(
-                    chat_id=message.chat.id,
-                    text=f"Пользователь {message.from_user.first_name}, предупреждение {warnings + 1} из {MAX_WARNINGS}."
-                )
+                    bot.send_message(
+                        chat_id=message.chat.id,
+                        text=f"Пользователь {message.from_user.first_name}, предупреждение {warnings + 1} из {MAX_WARNINGS}."
+                    )
+        elif user_datas[str(user_id)]["warnings"] == 1:
+            with open(f'Chat_{message.chat.id}_members.json', "r", encoding="utf-8") as file:
+                user_datas = json.load(file)
+            if user_datas[str(user_id)]["toxic_count"] >= WARNING_THRESHOLD_1:
+                if user_datas[str(user_id)]["warnings"] < MAX_WARNINGS:
+                    user_datas[str(user_id)]["warnings"] += 1
+                    user_datas[str(user_id)]["toxic_count"] = 0
+                    user_datas.update(user_datas)
+                    with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
+                        json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
+
+                    bot.send_message(
+                        chat_id=message.chat.id,
+                        text=f"Пользователь {message.from_user.first_name}, предупреждение {warnings + 1} из {MAX_WARNINGS}."
+                    )
+
+        elif user_datas[str(user_id)]["warnings"] == 2:
+            with open(f'Chat_{message.chat.id}_members.json', "r", encoding="utf-8") as file:
+                user_datas = json.load(file)
+            if user_datas[str(user_id)]["toxic_count"] >= WARNING_THRESHOLD_2:
+                if user_datas[str(user_id)]["warnings"] < MAX_WARNINGS:
+                    user_datas[str(user_id)]["warnings"] += 1
+                    user_datas[str(user_id)]["toxic_count"] = 0
+                    user_datas.update(user_datas)
+                    with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
+                        json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
+
+                    bot.send_message(
+                        chat_id=message.chat.id,
+                        text=f"Пользователь {message.from_user.first_name}, предупреждение {warnings + 1} из {MAX_WARNINGS}."
+                    )
+
+
         if user_datas[str(user_id)]["warnings"] == MAX_WARNINGS:
             bot.send_message(
                 chat_id=message.chat.id,
@@ -99,22 +139,42 @@ def main(message):
             # Если достигнут порог нейтральных сообщений, сбрасываем токсичность
             with open(f'Chat_{message.chat.id}_members.json', "r", encoding="utf-8") as file:
                 user_datas = json.load(file)
-            if user_datas[str(user_id)]["neutral_count"] >= NEUTRAL_THRESHOLD:
-                if user_datas[str(user_id)]["warnings"] > 0:
-                    user_datas[str(user_id)]["warnings"] -= 1
-                    # print(user_data[user_id]["warnings"])
-                    user_datas[str(user_id)]["neutral_count"] = 0  # Сбрасываем счетчик нейтральных сообщений
-                    with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
-                        json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
-                    bot.send_message(
-                        chat_id=message.chat.id,
-                        text=f"Пользователь {message.from_user.first_name}, вы реабилитировались. Одно предупреждение сброшено. Теперь у вас {user_datas[str(user_id)]["warnings"]} предупреждений."
-                    )
-
-                    #print(user_data[user_id]["toxic_count"])
-
-
-
+            if user_datas[str(user_id)]["warnings"] == 1:
+                if user_datas[str(user_id)]["neutral_count"] >= NEUTRAL_THRESHOLD_0:
+                    if user_datas[str(user_id)]["warnings"] > 0:
+                        user_datas[str(user_id)]["warnings"] -= 1
+                        # print(user_data[user_id]["warnings"])
+                        user_datas[str(user_id)]["neutral_count"] = 0  # Сбрасываем счетчик нейтральных сообщений
+                        with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
+                            json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
+                        bot.send_message(
+                            chat_id=message.chat.id,
+                            text=f"Пользователь {message.from_user.first_name}, вы реабилитировались. Одно предупреждение сброшено. Теперь у вас {user_datas[str(user_id)]["warnings"]} предупреждений."
+                        )
+            elif user_datas[str(user_id)]["warnings"] == 2:
+                if user_datas[str(user_id)]["neutral_count"] >= NEUTRAL_THRESHOLD_1:
+                    if user_datas[str(user_id)]["warnings"] > 0:
+                        user_datas[str(user_id)]["warnings"] -= 1
+                        # print(user_data[user_id]["warnings"])
+                        user_datas[str(user_id)]["neutral_count"] = 0  # Сбрасываем счетчик нейтральных сообщений
+                        with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
+                            json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
+                        bot.send_message(
+                            chat_id=message.chat.id,
+                            text=f"Пользователь {message.from_user.first_name}, вы реабилитировались. Одно предупреждение сброшено. Теперь у вас {user_datas[str(user_id)]["warnings"]} предупреждений."
+                        )
+            elif user_datas[str(user_id)]["warnings"] == 3:
+                if user_datas[str(user_id)]["neutral_count"] >= NEUTRAL_THRESHOLD_2:
+                    if user_datas[str(user_id)]["warnings"] > 0:
+                        user_datas[str(user_id)]["warnings"] -= 1
+                        # print(user_data[user_id]["warnings"])
+                        user_datas[str(user_id)]["neutral_count"] = 0  # Сбрасываем счетчик нейтральных сообщений
+                        with open(f'Chat_{message.chat.id}_members.json', "w", encoding="utf-8") as file:
+                            json.dump(user_datas, file, indent=4, ensure_ascii=False)  # Сохраняем в формате JSON
+                        bot.send_message(
+                            chat_id=message.chat.id,
+                            text=f"Пользователь {message.from_user.first_name}, вы реабилитировались. Одно предупреждение сброшено. Теперь у вас {user_datas[str(user_id)]["warnings"]} предупреждений."
+                        )
 
     with open('Dorabotka.txt', 'a') as file:
         file.write(str(message.text) + '@' + toxic_pred(str(message.text)) + '\n')
