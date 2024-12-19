@@ -15,8 +15,8 @@ WARNING_THRESHOLD_2 = rn(1, 3)
 print(WARNING_THRESHOLD_0, WARNING_THRESHOLD_1, WARNING_THRESHOLD_2)
 MAX_WARNINGS = 3
 NEUTRAL_THRESHOLD_0 = rn(45, 130)
-NEUTRAL_THRESHOLD_1 = rn(100, 245)
-NEUTRAL_THRESHOLD_2 = rn(175, 300)
+NEUTRAL_THRESHOLD_1 = rn(130, 245)
+NEUTRAL_THRESHOLD_2 = rn(245, 350)
 print(NEUTRAL_THRESHOLD_0, NEUTRAL_THRESHOLD_1, NEUTRAL_THRESHOLD_2)
 
 # print(NEUTRAL_THRESHOLD)
@@ -85,7 +85,8 @@ def main(message):
 
                     bot.send_message(
                         chat_id=message.chat.id,
-                        text=f"Пользователь {message.from_user.first_name}, предупреждение {warnings + 1} из {MAX_WARNINGS}."
+                        text=f"Пользователь {message.from_user.first_name}, предупреждение {warnings + 1} из {MAX_WARNINGS}. \n"
+                             f"Если продолжите, следующие предупреждения будут даваться намного быстрее."
                     )
         elif user_datas[str(user_id)]["warnings"] == 1:
             with open(f'Chat_{message.chat.id}_members.json', "r", encoding="utf-8") as file:
