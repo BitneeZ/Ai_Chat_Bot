@@ -1,14 +1,15 @@
 #Новый алгоритм распознавания эмоций
 import nltk
-import re
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 # нужные ресурсы NLTK загружены
 nltk.download('vader_lexicon')
-
-# Инициализация анализатора тональности
 sia = SentimentIntensityAnalyzer()
 
+# Use a pipeline as a high-level helper
+from transformers import pipeline
+
+pipe = pipeline("translation", model="Helsinki-NLP/opus-mt-ru-en")
 # список эмоций
 EMOTIONS = {
     "радость": ["happy", "joy", "pleased"],
@@ -55,7 +56,10 @@ def analyze_emotion(sentence):
 
 # запуск
 if __name__ == "__main__":
-    example_sentence = "I feel so proud and accomplished today!" #тут меняй переменную как хочешь, чтобы она могла быть встроеннна в бота
+    ru_sentence = "Я люблю яблоки"
+    example_sentence = pipe(f"{ru_sentence}")  # тут меняй переменную как хочешь, чтобы она могла быть встроеннна в бота
+    print(example_sentence)
+    print(example_sentence[("translation_text", 1)])
     result = analyze_emotion(example_sentence) # это лучше не менять, есть шанс что всё сломаеться :)
     # вывод результата
     print("\n--- Анализ эмоции ---")
