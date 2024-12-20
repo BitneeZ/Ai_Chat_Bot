@@ -1,8 +1,8 @@
 import json
 from random import randint as rn
-
+from datetime import datetime, timedelta
+from pyrogram.types import ChatPermissions
 import telebot
-
 from ai_engine import *
 
 bot = telebot.TeleBot('7467372440:AAH_4eA_UdxhHcQrkPdgJf1cGIEE1bBuoMI')
@@ -176,6 +176,8 @@ def main(message):
                             chat_id=message.chat.id,
                             text=f"Пользователь {message.from_user.first_name}, вы реабилитировались. Одно предупреждение сброшено. Теперь у вас {user_datas[str(user_id)]["warnings"]} предупреждений."
                         )
+
+    
 
     with open('Dorabotka.txt', 'a') as file:
         file.write(str(message.text) + '@' + toxic_pred(str(message.text)) + '\n')
